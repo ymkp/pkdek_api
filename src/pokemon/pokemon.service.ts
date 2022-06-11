@@ -39,7 +39,7 @@ export class PokemonService {
   async getPokemonMiniSingle(natDex: number): Promise<PokemonMiniDTO> {
     const p = await this.pokemonRepo.getByNatDex(natDex);
     if (p) {
-      return p;
+      return plainToInstance(PokemonMiniDTO, p);
     } else {
       throw new NotFoundException(
         null,
