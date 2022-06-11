@@ -18,15 +18,15 @@ export class PokemonMiniDTO {
   @ApiProperty()
   types: string[];
 
-  @Expose()
-  @ApiProperty()
-  spriteDefault: string;
+  // @Expose()
+  // @ApiProperty()
+  // spriteDefault: string;
 
-  @Expose()
-  @ApiProperty()
-  spriteDream: string;
+  // @Expose()
+  // @ApiProperty()
+  // spriteDream: string;
 
-  @Expose()
-  @ApiProperty()
-  officialArtwork: string;
+  // @Expose()
+  // @ApiProperty()
+  // officialArtwork: string;
 }
