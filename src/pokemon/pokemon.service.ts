@@ -11,6 +11,7 @@ import { PokemonRepository } from './repositories/pokemon.repository';
 import { firstValueFrom } from 'rxjs';
 import { PokemonInterface } from './interface/pokemon.interface';
 import { PokemonFetchQ } from './dtos/pokemon-fetch.dto';
+import { Pokemon } from './entities/pokemon.entity';
 
 @Injectable()
 export class PokemonService {
@@ -36,14 +37,20 @@ export class PokemonService {
     return { data: plainToInstance(PokemonMiniDTO, data), meta };
   }
 
-  async getPokemonMiniSingle(natDex: number): Promise<PokemonMiniDTO> {
-    const p = await this.pokemonRepo.getByNatDex(natDex);
+  async getPokemonMiniSingle(input: string): Promise<PokemonMiniDTO> {
+    const n = Number(input);
+    let p: Pokemon;
+    if (n) {
+      p = await this.pokemonRepo.getByDex(n);
+    } else {
+      p = await this.pokemonRepo.getByName(input);
+    }
     if (p) {
       return plainToInstance(PokemonMiniDTO, p);
     } else {
       throw new NotFoundException(
         null,
-        `Pokemon with nat dex ${natDex} not found`,
+        `Pokemon with nat dex ${input} not found`,
       );
     }
   }
@@ -73,7 +80,7 @@ export class PokemonService {
     pokemon.types.forEach((p) => {
       types.push(p.type.name);
     });
-    const p = await this.pokemonRepo.getByNatDex(pokemon.id);
+    const p = await this.pokemonRepo.getByDex(pokemon.id);
     if (p) {
     } else {
       this.pokemonRepo.save({

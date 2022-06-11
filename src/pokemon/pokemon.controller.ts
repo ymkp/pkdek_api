@@ -25,11 +25,11 @@ export class PokemonController {
     await this.service.fetchPokemonsFromPokeApi(query);
   }
 
-  @Get('/:natDex')
-  @ApiOperation({ summary: 'get pokemon by nat dex' })
+  @Get('/:natDexOrName')
+  @ApiOperation({ summary: 'get pokemon by nat dex or name' })
   async getPokemonMiniByNatDex(
-    @Param('natDex') natDex: number,
+    @Param('natDexOrName') input: string,
   ): Promise<PokemonMiniDTO> {
-    return await this.service.getPokemonMiniSingle(natDex);
+    return await this.service.getPokemonMiniSingle(input);
   }
 }
