@@ -14,7 +14,7 @@ export class PokemonFetchQ {
   start = 1;
 
   @ApiProperty({
-    description: 'start from nat dex : i',
+    description: 'stop on nat dex : i',
     type: Number,
   })
   @IsNumber()

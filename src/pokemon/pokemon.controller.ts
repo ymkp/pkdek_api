@@ -20,7 +20,7 @@ export class PokemonController {
   }
 
   @Post()
-  @ApiOperation({ summary: 'fetch from poke api' })
+  @ApiOperation({ summary: 'fetch pokemon data from poke api' })
   async fetchPokemons(@Query() query: PokemonFetchQ): Promise<void> {
     await this.service.fetchPokemonsFromPokeApi(query);
   }
